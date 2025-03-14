@@ -39,11 +39,11 @@ clone_plugin() {
 # clone plugin and produce output
 install_plugin() {
 	local plugin="${1%%;*}"
-	local alias=$(echo $1 | sed -E 's/.*alias[[:space:]]*[:=][[:space:]]*//')
-	local branch="$2"
+	local alias=$(echo $1$2 | sed -E 's/.*alias[[:space:]]*[:=][[:space:]]*//')
+	local branch="${2%%;*}"
 	local plugin_name="$(plugin_name_helper "$plugin")"
 
-  [[ "$alias" == "$1" ]] && alias=""
+  [[ "$alias" == "$1$2" ]] && alias=""
 
 	if plugin_already_installed "$plugin"; then
 		echo_ok "Already installed \"$plugin_name\""
